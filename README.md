@@ -1,35 +1,35 @@
 # Tic-Tac-Toe Premium
 
-Juego de tres en raya con UI/UX moderna, accesible y responsiva.
+A modern, accessible, and responsive Tic-Tac-Toe game with a premium UI/UX.
 
-## Características
-- Modo PvP y PvC con 3 dificultades (Fácil/Medio/Difícil)
-- Deshacer (Undo)
-- Preferencias: Sonido y Vibración (persisten en localStorage)
-- Selector de jugador inicial (X u O). En PvC, si empieza O, la IA abre
-- Navegación por teclado: flechas para moverse, Enter/Espacio para jugar
-- Accesibilidad ARIA y foco en modales
-- Animaciones, partículas y confetti
+This project showcases strong front-end development skills, including advanced UI/UX implementation, accessibility compliance (ARIA), state management, local storage persistence, and AI logic development.
 
-## Ejecutar localmente
-Puedes abrir `index.html` directamente en el navegador o levantar un servidor estático:
+## Key Features
+
+### Advanced Gameplay
+- **Player vs Player (PvP) and Player vs Computer (PvC) Modes:**
+    - PvC offers **3 difficulty levels:** Easy, Medium, and Hard (implementing different levels of AI strategy).
+- **Undo Functionality:** Allows players to reverse the last move.
+- **Starting Player Selector (X or O):** In PvC mode, if 'O' is selected to start, the AI gracefully makes the opening move.
+
+### Modern UI/UX & Interactivity
+- **Persistable User Preferences:**
+    - **Sound and Vibration controls** with settings stored locally using `localStorage`.
+- **Rich Visual Feedback:**
+    - Includes **Animations, Particle Effects, and Confetti** for an engaging and modern feel.
+
+### Accessibility & Responsiveness
+- **Full Keyboard Navigation:**
+    - **Arrow Keys** for seamlessly navigating between cells.
+    - **Enter / Space** to place a mark.
+- **ARIA Accessibility:** Implements **ARIA roles and states** for screen reader compatibility.
+- **Focus Management:** Meticulous focus handling, especially within modals, for an intuitive experience.
+- **Responsive Design:** Ensures a flawless experience across all devices and screen sizes.
+
+## Local Execution
+
+The project is built with simple, portable HTML, CSS, and JavaScript. You can run it instantly by opening `index.html` directly in your browser or by using a local static server.
 
 ```powershell
-# con http-server (npx)
+# Using http-server (via npx)
 npx http-server -p 5173 -c-1
-```
-
-Luego abre:
-
-- http://localhost:5173/
-
-No hay 404 de favicon: se incluyó un favicon por data URL.
-
-## Atajos
-- Flechas: Mover foco entre celdas
-- Enter/Espacio: Colocar ficha
-- Escape: Cerrar modales
-
-## Problemas comunes
-- Si no escuchas sonido, revisa que el interruptor de sonido esté activo y que el navegador permita audio tras una interacción.
-- En móviles, la vibración depende del soporte del dispositivo.
