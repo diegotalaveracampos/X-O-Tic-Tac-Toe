@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe | Experiencia Premium</title>
+    <meta name="theme-color" content="#6366f1">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%236366f1'/%3E%3Ctext x='14' y='44' font-family='Inter, Arial, sans-serif' font-size='36' font-weight='800' fill='white'%3EX%3C/text%3E%3Ctext x='34' y='44' font-family='Inter, Arial, sans-serif' font-size='36' font-weight='800' fill='%23fbbf24'%3EO%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="game-layout">
+            <!-- Columna Izquierda: Tablero y Acciones -->
+            <div class="layout-column column-main">
+                <!-- Header -->
+                <header class="header">
+                    <h1 class="title">Tic-Tac-Toe</h1>
+                    <p class="subtitle">Experiencia Premium</p>
+                    <p class="sr-only" id="sr-instructions">Usa las flechas para moverte por el tablero y pulsa Enter o Barra espaciadora para colocar tu ficha.</p>
+                </header>
+
+                <!-- Game Status -->
+                <div class="game-status">
+                    <div class="status-display">
+                        <div class="current-turn">
+                            <span class="turn-label">Turno:</span>
+                            <span class="turn-indicator" id="turn-indicator">
+                                <span class="player-symbol" id="current-symbol">X</span>
+                                <span class="player-name" id="current-player">Jugador 1</span>
+                            </span>
+                        </div>
+                        <div class="ai-thinking" id="ai-thinking" style="display: none;">
+                            <div class="thinking-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span>IA pensando...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Board -->
+                <div class="game-board-container">
+                    <div class="game-board" id="game-board" role="grid" aria-label="Tablero de tres en raya" aria-describedby="sr-instructions" aria-live="polite">
+                        <div class="cell" data-index="0" role="gridcell" tabindex="0" aria-label="Celda 1 vacía"></div>
+                        <div class="cell" data-index="1" role="gridcell" tabindex="0" aria-label="Celda 2 vacía"></div>
+                        <div class="cell" data-index="2" role="gridcell" tabindex="0" aria-label="Celda 3 vacía"></div>
+                        <div class="cell" data-index="3" role="gridcell" tabindex="0" aria-label="Celda 4 vacía"></div>
+                        <div class="cell" data-index="4" role="gridcell" tabindex="0" aria-label="Celda 5 vacía"></div>
+                        <div class="cell" data-index="5" role="gridcell" tabindex="0" aria-label="Celda 6 vacía"></div>
+                        <div class="cell" data-index="6" role="gridcell" tabindex="0" aria-label="Celda 7 vacía"></div>
+                        <div class="cell" data-index="7" role="gridcell" tabindex="0" aria-label="Celda 8 vacía"></div>
+                        <div class="cell" data-index="8" role="gridcell" tabindex="0" aria-label="Celda 9 vacía"></div>
+                    </div>
+                    <div class="winning-line" id="winning-line"></div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="action-btn undo-btn" id="undo-btn" aria-label="Deshacer último movimiento">
+                        <span>↩️</span>
+                        Deshacer
+                    </button>
+                    <button class="action-btn reset-btn" id="reset-btn">
+                        <span>🔄</span>
+                        Reiniciar Juego
+                    </button>
+                    <button class="action-btn stats-btn" id="stats-btn">
+                        <span>📊</span>
+                        Estadísticas
+                    </button>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Controles -->
+            <div class="layout-column column-sidebar">
+                <!-- Game Controls -->
+                <div class="controls">
+                    <div class="mode-selector">
+                        <h3>Modo de Juego</h3>
+                        <div class="mode-buttons">
+                            <button id="pvp-mode" class="mode-btn active">
+                                <span class="mode-icon">👥</span>
+                                <span class="mode-text">Jugador vs Jugador</span>
+                            </button>
+                            <button id="pvc-mode" class="mode-btn">
+                                <span class="mode-icon">🤖</span>
+                                <span class="mode-text">Jugador vs IA</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-selector" id="difficulty-selector" style="display: none;">
+                        <h3>Nivel de Dificultad</h3>
+                        <div class="difficulty-buttons">
+                            <button class="difficulty-btn active" data-level="easy">
+                                <span class="difficulty-icon">😊</span>
+                                <span class="difficulty-label">Fácil</span>
+                                <small>Movimientos aleatorios</small>
+                            </button>
+                            <button class="difficulty-btn" data-level="medium">
+                                <span class="difficulty-icon">🤔</span>
+                                <span class="difficulty-label">Medio</span>
+                                <small>Estrategia heurística</small>
+                            </button>
+                            <button class="difficulty-btn" data-level="hard">
+                                <span class="difficulty-icon">🧠</span>
+                                <span class="difficulty-label">Difícil</span>
+                                <small>Algoritmo Minimax</small>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="preferences" id="preferences">
+                        <h3>Preferencias</h3>
+                        <div class="prefs-grid">
+                            <label class="switch">
+                                <input type="checkbox" id="sound-toggle" checked aria-label="Activar o desactivar sonido">
+                                <span class="slider"></span>
+                                <span class="switch-label">Sonido</span>
+                            </label>
+                            <label class="switch">
+                                <input type="checkbox" id="vibrate-toggle" checked aria-label="Activar o desactivar vibración">
+                                <span class="slider"></span>
+                                <span class="switch-label">Vibración</span>
+                            </label>
+                        </div>
+
+                        <div class="start-player">
+                            <span class="start-label">Empieza:</span>
+                            <div class="start-buttons" role="group" aria-label="Seleccionar jugador inicial">
+                                <button id="start-x" class="mode-btn small active" aria-pressed="true">X</button>
+                                <button id="start-o" class="mode-btn small" aria-pressed="false">O</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Result (Nuevo Modal) -->
+        <div class="game-result" id="game-result" role="dialog" aria-modal="true" aria-labelledby="result-title" aria-describedby="result-message" style="display: none;">
+            <div class="result-content" tabindex="-1">
+                <button class="close-btn" id="close-result" aria-label="Cerrar">×</button>
+                <div class="result-header">
+                    <div class="result-icon" id="result-icon">🎉</div>
+                    <h2 class="result-title" id="result-title">¡Ganaste!</h2>
+                    <p class="result-message" id="result-message">¡Excelente juego!</p>
+                </div>
+                <div class="result-actions">
+                    <button class="play-again-btn" id="play-again-btn">
+                        <span>🔄</span>
+                        Jugar de Nuevo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Modal -->
+        <div class="modal" id="stats-modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>📊 Estadísticas del Juego</h3>
+                    <button class="close-btn" id="close-stats">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-value" id="games-played">0</span>
+                            <span class="stat-label">Partidas Jugadas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="player-wins">0</span>
+                            <span class="stat-label">Victorias Jugador</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="ai-wins">0</span>
+                            <span class="stat-label">Victorias IA</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="draws">0</span>
+                            <span class="stat-label">Empates</span>
+                        </div>
+                    </div>
+                    <button class="reset-stats-btn" id="reset-stats">
+                        Reiniciar Estadísticas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
