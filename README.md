@@ -2,13 +2,17 @@
 
 A modern, accessible, and responsive Tic-Tac-Toe game with a premium UI/UX.
 
+**🚀 Live Demo:** [https://diegotalaveracampos.github.io/X-O-Tic-Tac-Toe/](https://diegotalaveracampos.github.io/X-O-Tic-Tac-Toe/)
+
 This project showcases strong front-end development skills, including advanced UI/UX implementation, accessibility compliance (ARIA), state management, local storage persistence, and AI logic development.
+
+---
 
 ## Key Features
 
 ### Advanced Gameplay
 - **Player vs Player (PvP) and Player vs Computer (PvC) Modes:**
-    - PvC offers **3 difficulty levels:** Easy, Medium, and Hard (implementing different levels of AI strategy).
+    - PvC offers **3 difficulty levels:** Easy, Medium, and **Hard** (implementing different levels of AI strategy).
 - **Undo Functionality:** Allows players to reverse the last move.
 - **Starting Player Selector (X or O):** In PvC mode, if 'O' is selected to start, the AI gracefully makes the opening move.
 
@@ -25,6 +29,8 @@ This project showcases strong front-end development skills, including advanced U
 - **ARIA Accessibility:** Implements **ARIA roles and states** for screen reader compatibility.
 - **Focus Management:** Meticulous focus handling, especially within modals, for an intuitive experience.
 - **Responsive Design:** Ensures a flawless experience across all devices and screen sizes.
+
+---
 
 ## Local Execution
 
